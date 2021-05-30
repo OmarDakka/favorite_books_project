@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> {% load static %}
+    <link rel="stylesheet" href="{% static '/style.css' %}">
+    <title>Register or Login</title>
+    <style>
+        .error {
+            text-align: center;
+        }
+        
+        html,
+        body {
+            height: 100%;
+        }
+        
+        .grab {
+            display: flex;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+        
+        .form-signin {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: auto;
+        }
+        
+        .form-signin .checkbox {
+            font-weight: 400;
+        }
+        
+        .form-signin .form-floating:focus-within {
+            z-index: 2;
+        }
+        
+        .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        
+        .space {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="text-center grab">
+        <main class="form-signin">
+            <form action='/reg' method="POST">
+                {% csrf_token %}
+
+                <h1 class="h3 mb-3 fw-normal">Register</h1>
+
+                <div class="form-floating">
+                    <input type="text" class="form-control" name="fname" placeholder="Naruto">
+                    <label for="fname">First Name</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control" name="lname" placeholder="Uzumaki">
+                    <label for="lname">Last Name</label>
+                </div>
+                <div class="form-floating">
+                    <input type="email" class="form-control" name="email" placeholder="name@example.com">
+                    <label for="email">Email address</label>
+                </div>
+                <div class="form-floating">
+                    <input type="date" class="form-control" name="birthday" placeholder="name@example.com">
+                    <label for="birthday">Birthday</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                    <label for="password">Password</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control space" name="confirmPassword" placeholder="Confirm Password">
+                    <label for="confirmPassword">Confirm Password</label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+            </form>
+        </main>
+        <main class="form-signin">
+            <form action='/login' method="POST">
+                {% csrf_token %}
+                <h1 class="h3 mb-3 fw-normal">Sign in</h1>
+
+                <div class="form-floating">
+                    <input type="email" class="form-control" name="email" placeholder="name@example.com">
+                    <label for="email">Email address</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control space" name="password" placeholder="Password">
+                    <label for="password">Password</label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            </form>
+        </main>
+    </div>
+    <div class="error">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</body>
+
+</html>
